@@ -1,0 +1,16 @@
+{
+    "name": "itigroup/php-project",
+    "description": "PHP Course Final Project",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Controllers\\": "app/Controllers/",
+            "Models\\": "app/Models"
+        },
+        "files": ["config.php"]
+    },
+    "require": {
+        "illuminate/database": "^8.83",
+        "illuminate/support": "^8.83"
+    }
+}
