@@ -1,7 +1,0 @@
-<?php
-
-define("_DRIVER_", "");
-define("_HOST_", "");
-define("_DATABASE_", "");
-define("_USERNAME_", "");
-define("_PASSWORD_", "");
