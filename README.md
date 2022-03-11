@@ -1,8 +1,8 @@
 # ITI-PHP_Project
 
 ## Team Members:
-Mahmoud Kamal /
-Mohamed Said (Team Leader) /
-Radwa Mostafa / 
-Rana Ehab /
+Mahmoud Kamal \
+Mohamed Said (Team Leader) \
+Radwa Mostafa \
+Rana Ehab \
 Salam Mohamed 
