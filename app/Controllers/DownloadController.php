@@ -6,7 +6,7 @@ use Models\Order;
 use Models\Product;
 
 class DownloadController {
-    public static function downloadProduct() {
+    public static function checkAndGetLink() {
         $order = Order::where('id', '=', $_SESSION['user_id'])->get()->first();
         if($order->Download_count <= 7) {
             $product = Product::where('Product_id', '=', 1)->get()->first();
@@ -18,7 +18,7 @@ class DownloadController {
         }
     }
 
-    public static function changeFileName() {
+    public static function downloadAndChangeFileName() {
         $product = Product::where('Product_id', '=', 1)->get()->first();
         $result = $product->download_file_link;
         header("Content-Description: File Transfer");
@@ -30,4 +30,3 @@ class DownloadController {
         Product::where('Product_id', '=', 1)->update(['download_file_link' => $newName]);
     }
 }
-?>

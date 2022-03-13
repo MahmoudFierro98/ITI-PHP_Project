@@ -1,28 +1,22 @@
 <?php
 
 use Controllers\UserController;
-use Controllers\TokenController;
 
 if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true)
     header("Location: http://localhost:8000/");
 
-    $result = '';
+$result = '';
 
 if (isset($_POST['submit'])) {
     $request = [
         'email' => $_POST['email'],
         'password' => $_POST['password'],
+        'remember' => isset($_POST['remember']) ? true : false
     ];
     $result = UserController::login($request);
 
-    if ($result === 'success') {
-        if (empty($_POST['remember'])) {
-            TokenController::rememberMe($request);
-
-            var_dump($_POST['remember']);
-        }
+    if ($result === 'success')
         header("Location: http://localhost:8000/");
-    }
 }
 ?>
 
@@ -42,7 +36,7 @@ if (isset($_POST['submit'])) {
         <input type="email" name="email" required>
         <label for="password">Password</label>
         <input type="password" name="password" required>
-        <input type="checkbox" name="remember" checked />Remember me
+        <input type="checkbox" name="remember" checked />Remember Me
         <input type="submit" name="submit" value="Login">
     </form>
     <?php echo $result ?>

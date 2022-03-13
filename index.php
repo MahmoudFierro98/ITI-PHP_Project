@@ -3,11 +3,13 @@
 session_start();
 
 require 'vendor/autoload.php';
- 
+
+use Controllers\TokenController;
 use Models\Database;
  
 new Database();
 
+TokenController::check();
 
 if(isset($_SERVER['PATH_INFO'])) {
     $route = substr($_SERVER['PATH_INFO'], 1);

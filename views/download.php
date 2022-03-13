@@ -14,11 +14,11 @@ if (isset($_POST['logout'])) {
 }
 
 if (isset($_POST['download'])) {
-    $result = DownloadController::downloadProduct();
+    $result = DownloadController::checkAndGetLink();
     if ($result === 'download limit reached') {
         $error = $result;
     } else {
-        DownloadController::changeFileName();
+        DownloadController::downloadAndChangeFileName();
     }
 }
 

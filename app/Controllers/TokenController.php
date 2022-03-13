@@ -4,41 +4,32 @@ namespace Controllers;
 
 
 use Models\Token;
-use Models\User;
 
 
 class TokenController
 {
-    public static function CreateToken($id)
-    {
-        $token = token::where('id', '=', $id)->get()->first();
-        $token = new Token();
-        $str = rand();
-        setcookie("remeber_me", $str, 0);
-        $result = sha1($str);
-        $token->remeber_me_token = $result;
-        /*-if ($token) {
-            $result = $token->remeber_me_token;
-            setcookie("remeber_me", $result, 600);
-        } else {
-            $token = new Token();
-            $str = rand();
-            setcookie("remeber_me", $str, 60);
-            $result = sha1($str);
-            $token->remeber_me_token = $result;
-        }*/
-    }
 
-    public static function rememberMe($request)
-    {
-        try {
-            $user = User::where('User_Email', '=', $request['email'])->get()->first();
-            if ($user) {
-                //$_SESSION['user_id'] = $user->User_ID;
-                self::CreateToken($user->User_ID);
-            }
-        } catch (\Throwable $e) {
-            return $e;
+    public static function check() {
+        if(isset($_COOKIE["remember_me"]) && Token::where('remember_me_token', '=', $_COOKIE["remember_me"])->where('expiration_date', '>', time())->exists()) {
+            $token = Token::where('remember_me_token', '=', $_COOKIE["remember_me"])->get()->first();
+            $_SESSION['logged_in'] =  true;
+            $_SESSION['user_id'] = $token->user_id;
         }
     }
+
+
+    public static function create($user_id) {
+        $tokenString = bin2hex(random_bytes(32));
+        $token = new Token();
+        $token->remember_me_token = $tokenString;
+        $token->user_id = $user_id;
+        $token->expiration_date = time() + 86400;
+        $token->save();
+        setcookie("remember_me", $tokenString, $token->expiration_date, "/");
+    }
+
+    public static function destroy() {
+        setcookie("remember_me", "", time() - 3600);
+    }
+    
 }

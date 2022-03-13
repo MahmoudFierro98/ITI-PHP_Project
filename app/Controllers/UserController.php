@@ -48,9 +48,10 @@ class UserController
             $user = User::where('User_Email', '=', $request['email'])->get()->first();
             if ($user) {
                 if (password_verify($request['password'], $user->Password)) {
-                    // session_start();
                     $_SESSION['logged_in'] = true;
                     $_SESSION['user_id'] = $user->User_ID;
+                    if($request['remember'])
+                        TokenController::create($user->User_ID);
                     return 'success';
                 } else {
                     return 'Incorrect password.';
@@ -68,5 +69,6 @@ class UserController
         session_start();
         session_unset();
         session_destroy();
+        TokenController::destroy();
     }
 }
