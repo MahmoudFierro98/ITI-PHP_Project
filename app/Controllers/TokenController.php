@@ -10,10 +10,11 @@ class TokenController
 {
 
     public static function check() {
-        if(isset($_COOKIE["remember_me"]) && Token::where('remember_me_token', '=', $_COOKIE["remember_me"])->where('expiration_date', '>', time())->exists()) {
+        if(isset($_COOKIE["remember_me"]) && !isset($_SESSION['logged_in']) && Token::where('remember_me_token', '=', $_COOKIE["remember_me"])->where('expiration_date', '>', time())->exists()) {
             $token = Token::where('remember_me_token', '=', $_COOKIE["remember_me"])->get()->first();
             $_SESSION['logged_in'] =  true;
             $_SESSION['user_id'] = $token->user_id;
+            TokenController::create($token->user_id);
         }
     }
 

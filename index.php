@@ -15,7 +15,7 @@ if(isset($_SERVER['PATH_INFO'])) {
     $route = substr($_SERVER['PATH_INFO'], 1);
 
     switch($route) {
-        case 'register':
+        case 'register':    
             require_once('views/register.php');
             break;
         case 'login':
