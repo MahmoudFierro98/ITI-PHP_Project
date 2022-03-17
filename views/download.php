@@ -48,25 +48,35 @@ if (isset($_POST['download'])) {
 
                     <li class="nav-item mx-0 mx-lg-1">
                         <form method="POST" action="<?php echo $_SERVER['PHP_SELF'] ?>">
-                            <button type="submit" name="logout" class="btn btn-primary">Logout</button>
+                            <button type="submit" name="logout" class="btn btn" style="color: #FFFFFF;;">LOGOUT</button>
                         </form>
                     </li>
-
-                </ul>
+                    </ul>
             </div>
         </div>
     </nav>
-    <div class="download">
-        <p>Now you can buy our product, all you need is to download it from here.</p>
-        <form method="POST" action="<?php echo $_SERVER['PHP_SELF'] ?>">
-            <button type="submit" class="downbutton" name="download">Download</button>
-        </form>
-        <div class="texterror"><?= $error ?></div>
-    </div>
-    <!-- <?php //echo $error ?> -->
-    <!-- <form method="POST" action="<?php //echo $_SERVER['PHP_SELF'] ?>">
-        <button type="submit" name="logout">Logout</button>
-    </form> -->
+ 
+    <div class="badge  text-wrap text-dark" style="margin-top: 10%;
+    margin-left: 40%;
+    margin-top:15%;
+    width: 600px;
+    height: 100px;
+    font-size:30px;
+    font-color:black;">
+     Now you can buy our product,
+      all you need is to download it from here.
+</div>
+<form method="POST" action="<?php echo $_SERVER['PHP_SELF'] ?>">
+<button type="submit" class="btn btn-success btn-lg" style="margin-top:0%;margin-left:55%;width:15%;" name="download">Download</button>
+</form>
+<?php if(isset($error)) { ?>
+                                
+        <div class="alert-danger" style="margin-top:2%;margin-left:55%;width:15%;">
+       <?php echo $error ?>
+            </div>
+            <?php } ?>
+            
+
 </body>
 
 </html>

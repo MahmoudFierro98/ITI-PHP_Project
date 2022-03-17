@@ -23,13 +23,3 @@ body{
     font-size: 36px;
     margin-left:25%;
 }
-
-p {
-    font-family: "Times New Roman", Times, serif;
-    font-size: 40px;
-}
-.texterror{
-    font-family: "Times New Roman", Times, serif;
-    font-size: 40px;
-    color: red;
-}
