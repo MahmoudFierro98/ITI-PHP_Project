@@ -14,6 +14,7 @@ class TokenController
             $token = Token::where('remember_me_token', '=', $_COOKIE["remember_me"])->get()->first();
             $_SESSION['logged_in'] =  true;
             $_SESSION['user_id'] = $token->user_id;
+            TokenController::destroy();
             TokenController::create($token->user_id);
         }
     }
@@ -30,6 +31,7 @@ class TokenController
     }
 
     public static function destroy() {
+        Token::where('user_id', '=', $_SESSION['user_id'])->delete();
         setcookie("remember_me", "", time() - 3600);
     }
     

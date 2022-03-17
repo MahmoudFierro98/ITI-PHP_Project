@@ -8,7 +8,7 @@ use Models\Product;
 class DownloadController {
     public static function checkAndGetLink() {
         $order = Order::where('id', '=', $_SESSION['user_id'])->get()->first();
-        if($order->Download_count <= 7) {
+        if($order->Download_count <= 6) {
             $product = Product::where('Product_id', '=', 1)->get()->first();
             $order->Download_count  = $order->Download_count + 1;
             $order->save();
@@ -28,5 +28,9 @@ class DownloadController {
         $newName = uniqid('xyz', true).".zip";
         rename('product/'.$product->download_file_link, "product/$newName");
         Product::where('Product_id', '=', 1)->update(['download_file_link' => $newName]);
+    }
+
+    public static function getDownloadCount() {
+        return Order::where('id', '=', $_SESSION['user_id'])->get()->first()->Download_count;
     }
 }

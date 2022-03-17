@@ -67,9 +67,9 @@ class UserController
 
     public static function logout()
     {
+        TokenController::destroy();
         session_start();
         session_unset();
         session_destroy();
-        TokenController::destroy();
     }
 }

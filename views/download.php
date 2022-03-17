@@ -66,6 +66,15 @@ if (isset($_POST['download'])) {
      Now you can buy our product,
       all you need is to download it from here.
 </div>
+
+<div class="badge  text-wrap text-dark" style="
+    margin-left: 40%;
+    width: 600px;
+    height: 100px;
+    font-size:20px;
+    font-color:black;">
+    <p>You downloaded the product <?php echo DownloadController::getDownloadCount()?> times</p>
+</div>
 <form method="POST" action="<?php echo $_SERVER['PHP_SELF'] ?>">
 <button type="submit" class="btn btn-success btn-lg" style="margin-top:0%;margin-left:55%;width:15%;" name="download">Download</button>
 </form>
