@@ -34,36 +34,7 @@ if (isset($_POST['download'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>XYZ - Download</title>
     <link rel="stylesheet" href="/assets/css/style.css">
-    <style>
-        .download {
-            margin-top: 10%;
-            margin-left: 40%;
-            width: 600px;
-            height: 100px;
-        }
-
-        .downbutton {
-            background-color: #4CAF50;
-            border: none;
-            color: white;
-            padding: 15px 32px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 36px;
-            margin-left:25%;
-        }
-
-        p {
-            font-family: "Times New Roman", Times, serif;
-            font-size: 40px;
-        }
-        .texterror{
-            font-family: "Times New Roman", Times, serif;
-            font-size: 40px;
-            color: red;
-        }
-    </style>
+    
 </head>
 
 <body>
