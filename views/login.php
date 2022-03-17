@@ -74,11 +74,16 @@ if (isset($_POST['submit'])) {
                                 <input class="form-control" name="password" type="password" id="floatingInput" placeholder="Password" >
                                 <label for="password">Password</label>
                             </div>
-                         
+
+                            <div class="form-floating mb-3">
+                            <div class="input-group-text">
+                            <input class="form-check-input mt-0" type="checkbox" value="Remember Me" name="remember" checked   aria-label="Checkbox for following text input">  Remember Me
+</div>
+                            </div>
                             
                             <div class="d-none" id="submitSuccessMessage">
                                 <div class="text-center mb-3">
-                                   
+                                
                                 </div>
                             </div>
                             
