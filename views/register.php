@@ -6,7 +6,8 @@ use Controllers\UserController;
 if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true)
     header("Location: http://localhost:8000/");
 
-$result = '';
+$result = [];
+
 
 if (isset($_POST['submit'])) {
     $request = [
@@ -20,7 +21,7 @@ if (isset($_POST['submit'])) {
     $credit_card = $_POST['credit_card'];
     $pattern = "^\d{16}$^";
     if (!preg_match($pattern, $credit_card))
-        $credit_card_result = 'Error! please Enter 16 positive digits';
+        $credit_card_result = 'Error! please Enter 16 positive digits in credit-card';
 }
 ?>
 
@@ -38,19 +39,7 @@ if (isset($_POST['submit'])) {
 </head>
 
 <body >
-    <!-- <form method="POST" action="<?php echo $_SERVER['PHP_SELF'] ?>">
-        <label for="email">Email</label>
-        <input type="text" name="email" required>
-        <label for="password">Password</label>
-        <input type="password" name="password" required>
-        <label for="password">Confirm Password</label>
-        <input type="password" name="password_confirmation" required>
-        <label for="cc">Credit Card</label>
-        <input type="text" name="credit_card" required>
-        <label for="expiration">Expiration date:</label>
-        <input type="month" name="expiration" min="2022-03" value="" required>
-        <input type="submit" name="submit" value="Register">
-    </form> -->
+    
       <nav class="navbar navbar-expand-lg bg-info text-uppercase fixed-top navbar-shrink" id="mainNav">
             <div class="container">
                 <a class="navbar-brand text-light fw-bold" href="#page-top">XYZ Product</a>
@@ -79,65 +68,69 @@ if (isset($_POST['submit'])) {
                         <form method="POST" action="<?php echo $_SERVER['PHP_SELF'] ?>">
                             <!-- Email address input-->
                             <div class="form-floating mb-3">
-                                <input class="form-control" id="email" type="text" name="email" data-sb-validations="required" data-sb-can-submit="no">
+                                <input class="form-control"  type="text" name="email" id="floatingInput" placeholder="name@example.com">
                                 <label for="email">Email address</label>
-                                <div class="invalid-feedback">
-                                  Please choose a username.</div>
+                                
                         
                             </div>
                             <!-- Password-->
                             <div class="form-floating mb-3">
-                                <input class="form-control" id="password"  name="password" type="password"  data-sb-validations="required" data-sb-can-submit="no">
+                                <input class="form-control" name="password" type="password" id="floatingInput" placeholder="password">
                                 <label for="phone">Password</label>
-                                <div class="invalid-feedback" data-sb-feedback="phone:required">A password is required.</div>
                             </div>
                          <!-- Password-->
                           <div class="form-floating mb-3">
-                                <input class="form-control" id="password_confirmation"  name="password_confirmation" type="password"  data-sb-validations="required" data-sb-can-submit="no">
+                                <input class="form-control" name="password_confirmation" type="password"  id="floatingInput" placeholder="password">
                                 <label for="phone">Confirm Password</label>
-                                <div class="invalid-feedback" data-sb-feedback="phone:required">A password is required.</div>
                             </div>
                              <!-- Credit card-->
                              <div class="form-floating mb-3">
-                                <input class="form-control"  type="text" name="credit_card" data-sb-validations="required" data-sb-can-submit="no">
+                                <input class="form-control"  type="text" name="credit_card" id="floatingInput" placeholder="credit-card">
                                 <label for="phone">Credit card</label>
-                                <div class="invalid-feedback" data-sb-feedback="credit_sacard:required">A credit card is required.</div>
                             </div>
                              <!-- Credit card Expiration -->
                             <div class="form-floating mb-3">
-                                <!-- <input type="month" name="expiration" min="2022-03" value="" required> -->
-                                <input class="form-control"  type="month" name="expiration" min="2022-03" data-sb-validations="required" data-sb-can-submit="no">
+                                <input class="form-control"  type="month" name="expiration" min="2022-03" id="floatingInput" placeholder="expirationDate">
                                
-                                <div class="invalid-feedback" data-sb-feedback="credit_sacard:required">A credit card is required.</div>
                             </div>
-                            <!-- Submit success message-->
-                            <!---->
-                            <!-- This is what your users will see when the form-->
-                            <!-- has successfully submitted-->
+                            
                             <div class="d-none" id="submitSuccessMessage">
                                 <div class="text-center mb-3">
-                                    <div class="fw-bolder">Form submission successful!</div>
-                                    To activate this form, sign up at
-                                    <br>
-                                    <a href="https://startbootstrap.com/solution/contact-forms">https://startbootstrap.com/solution/contact-forms</a>
+                                    
                                 </div>
                             </div>
-                            <!-- Submit error message-->
-                            <!---->
-                            <!-- This is what your users will see when there is-->
-                           
-                            <!-- Submit Button-->
                             <div class="d-grid"><input  class="btn btn-info btn-xl text-light " type="submit" name="submit" value="Register"></div>
                             
                         </form>
+                         <?php 
+                            if(isset($_POST['submit'])){ ?>
+                            <?php if(empty($result)){ ?>
+                                <div class="alert alert-success">
+                                Registration successfull, Please login
+                                </div>
+                                
+                            <?php  }else{
+                                foreach($result as $error){ ?>
+                                <div class="alert alert-danger">
+                                <?php echo $error ?>
+                                </div>
+
+                                 <?php }
+
+                
+                                }?>
+                                <?php if (isset($credit_card_result)){ ?>
+                        <div class="alert alert-danger"> <?php echo $credit_card_result;} ?>
+                            
+                            <br />
+                        </div>
+                            <?php } ?>
+        
                     </div>
                 </div>
                
             </div>
-            <div class="text-danger"><?= $result ?></div>
-    <?php if (isset($credit_card_result)) echo $credit_card_result; ?>
-    <br />
-    <!-- <a href="http://localhost:8000/login">Login</a> -->
+
 </body>
 
 </html>

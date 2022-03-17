@@ -11,32 +11,33 @@ class UserController
     {
         try {
 
-            $error = "";
+            $error=[];
+            
             if (User::where('User_Email', '=', $request['email'])->exists())
-                $error .= 'Email already in use.<br>';
+                $error[] = 'Email already in use.';
             elseif (!filter_var($request['email'], FILTER_VALIDATE_EMAIL)) {
-                $error .= 'Error! please enter a Valid email address.<br>';
+                $error[] = 'Error! please enter a Valid email address.';
             }
 
             if ($request['password'] !== $request['password_confirmation']) {
-                $error .= 'Error! Password confirmation doesn\'t match<br>';
+                $error[] = 'Error! Password confirmation doesn\'t match.';
             } else {
                 $str = $request['password'];
                 $pattern = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d@$!%*?&]{8,16}$^";
                 if (!preg_match($pattern, $str))
-                    $error .= 'Error! Password from 8 to 16 Alphanumeric characters with at least one digit and One Upper case letter<br>';
+                    $error[] = 'Error! Password from 8 to 16 Alphanumeric characters with at least one digit and One Upper case letter';
             }
 
-            if ($error === "") {
+            if (empty($error)) {
                 $user = new User();
                 $user->User_Email = $request['email'];
                 $user->Password = password_hash($request['password'], PASSWORD_BCRYPT);
                 $user->save();
                 OrderController::create($user->getQueueableId());
-                return 'Registration successfull, Please login.';
-            } else {
+                
+            } 
                 return $error;
-            }
+            
         } catch (\Throwable $e) {
             return $e;
         }
