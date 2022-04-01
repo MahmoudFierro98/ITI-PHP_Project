@@ -77,7 +77,7 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`Product_id`, `download_file_link`, `Product_name`, `created_at`, `updated_at`) VALUES
-(1, 'xyz622d587064d116.34113624.zip', 'XYZ', NULL, '2022-03-13 03:35:28');
+(1, 'xyz6229f108e3eb06.66661222.zip', 'XYZ', NULL, '2022-03-13 03:35:28');
 
 -- --------------------------------------------------------
 
